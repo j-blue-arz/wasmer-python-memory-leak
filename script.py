@@ -20,7 +20,8 @@ class Prompt(Cmd):
         wasi_version = wasi.get_version(module, strict=True)
         wasi_env = wasi.StateBuilder("foo").finalize()
         import_object = wasi_env.generate_import_object(store, wasi_version)
-        self._instance = Instance(module, import_object)
+        instance = Instance(module, import_object)
+        instance.exports.hello()
 
     def do_gc(self, inp):
         gc.collect()
